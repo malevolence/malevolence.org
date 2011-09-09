@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Malevolence.Core.Models.Album>
+@{
+    ViewBag.Title = "Gallery";
+}
+<h2>My Photo Galleries</h2>
+<section id="albums">
+@foreach (var item in Model) {
+	<article class="clearfix">
+		@if (item.CoverPhotoID.HasValue) {
+			<a href="@Url.RouteUrl("GalleryDetail", new { slug = item.UrlSlug })"><img src="/content/images/photos/thumbs/@item.CoverPhoto.FileName" alt="@item.Title" /></a>
+		} else {
+			<a href="@Url.RouteUrl("GalleryDetail", new { slug = item.UrlSlug })"><img src="/content/images/default/album_cover.png" alt="@item.Title" /></a>
+		}
+		<header>
+			<h3>@Html.RouteLink(string.Format("{0} ({1} photos)", item.Title, item.Photos.Count), "GalleryDetail", new { slug = item.UrlSlug })</h3>
+		</header>
+		<p>@item.Description.Replace(Environment.NewLine, "<br />")</p>
+		<footer>
+			<span>Added on <time datetime="@item.CreateDate.ToUniversalTime().ToString("yyyy-MM-ddThh:mm")-05:00">@item.CreateDate.ToString("D")</time></span>
+		</footer>
+	</article>
+}
+</section>

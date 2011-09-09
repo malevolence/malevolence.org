@@ -1,0 +1,36 @@
+﻿@model PagedList.PagedList<Malevolence.Core.Models.Album>
+@using Malevolence.Web.Helpers;
+@using Malevolence.Web.Models;
+@{
+    ViewBag.Title = "Malevolence.org > Admin > Gallery";
+}
+<h2>Gallery Admin</h2>
+<table>
+	<thead>
+		<tr>
+			<th class="center">Actions</th>
+			<th>Title</th>
+			<th>Slug</th>
+			<th class="right">Count</th>
+			<th class="right">Created On</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var album in Model) {
+			<tr>
+				<td class="center">@Html.ActionLink("Edit", "Edit", new { id = album.ID })</td>
+				<td>@album.Title</td>
+				<td>@album.UrlSlug</td>
+				<td class="right">@album.Photos.Count</td>
+				<td class="right">@string.Format("{0:g}", album.CreateDate)</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<div class="pager clearfix">
+@Html.PageLinks(new PagingInfo { CurrentPage = Model.PageNumber, TotalPages = Model.PageCount }, i => Url.Action("Index", new { Page = i }))
+</div>
+<div>Showing page @Model.PageNumber of @Model.PageCount total pages.</div>
+<div class="actions">
+	@Html.ActionLink("Add New Album", "Create", null, new { @class = "btn add" })
+</div>

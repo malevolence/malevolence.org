@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Malevolence.Core.Models.Post>
+
+@{
+	ViewBag.Title = "Malevolence.org > Admin > Gallery";
+}
+<h2>Blog Admin</h2>
+<table>
+	<thead>
+		<tr>
+			<th class="center">Actions</th>
+			<th>Title</th>
+			<th>Slug</th>
+			<th class="center">Category</th>
+			<th class="center">Pub Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var post in Model) {
+			<tr>
+				<td class="center">@Html.ActionLink("Edit", "Edit", new { id = post.ID })</td>
+				<td>@post.Title</td>
+				<td>@post.UrlSlug</td>
+				<td class="center">@post.Category.Title</td>
+				<td class="center">@(post.PublishedOn.HasValue ? string.Format("{0:g}", post.PublishedOn.Value) : "Not Published")</td>
+			</tr>
+		}
+	</tbody>
+</table>
+<div class="actions">
+	@Html.ActionLink("Add New Post", "Create", null, new { @class = "btn add" })
+</div>

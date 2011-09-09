@@ -1,0 +1,40 @@
+﻿@model Malevolence.Core.Models.Album
+@{
+    ViewBag.Title = "Album: " + Model.Title;
+}
+<article id="album">
+	<header>
+		<h2>@Model.Title</h2>
+		<span>Added on <time datetime="@Model.CreateDate.ToUniversalTime().ToString("yyyy-MM-ddThh:mm")-05:00" pubdate>@Model.CreateDate.ToString("D")</time></span>
+	</header>
+	<p>@Model.Description</p>
+	@if (Model.Photos.Count > 0) {
+		<ol class="photos clearfix">
+		@foreach (var p in Model.Photos) {
+			string caption = string.IsNullOrEmpty(p.Caption) ? "Album Photo" : p.Caption;
+			<li>
+				<a href="@Url.Action("ShowPhoto", new { id = p.ID })" title="@caption" rel="photos-@p.AlbumID"><img src="/content/images/photos/thumbs/@p.FileName" alt="@caption" /></a>
+				<span>@caption</span>
+			</li>
+		}
+		</ol>
+	} else {
+		<p>This album contains no photos.</p>
+	}
+</article>
+@section head {
+	<link rel="Stylesheet" href="@Url.Content("~/content/css/colorbox.css")" />
+}
+@section scripts {
+	<script src="@Url.Content("~/scripts/jquery.colorbox.min.js")"></script>
+	<script>
+		$(function() {
+			$('.photos a').colorbox({
+				href: function() {
+					var url = $(this).children('img').attr('src');
+					return url.replace('/thumbs', '');
+				}
+			});
+		});
+	</script>
+}

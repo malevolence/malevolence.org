@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "My Development Portfolio";
+}
+<h2>My Development Portfolio</h2>
+<section id="projects">
+	<article class="clearfix">
+		<a href="/content/images/portfolio/productionhub.png" class="screenshot" title="ProductionHUB.com"><img src="/content/images/portfolio/thumbs/productionhub.png" alt="ProductionHUB.com" /></a>
+		<header>
+			<h3>ProductionHUB.com</h3>
+		</header>
+		<p>I've been the lead developer and webmaster for productionhub.com since 2003. I've written every bit of code on the site through 4 separate iterations, including transitioning from asp classic to asp.net 1.1, and from asp.net 2.0 to asp.net 4.0. I am currently pressuring my boss to let me undertake a rewrite using asp.net mvc 3 but he's not budging so far :(. Instituted semantic markup and css-based layout before it was cool.</p>
+		<footer><a href="http://www.productionhub.com/">Visit Site</a></footer>
+	</article>
+	<article class="clearfix">
+		<a href="/content/images/portfolio/exploreyourparks.png" class="screenshot" title="ExploreYourParks.com"><img src="/content/images/portfolio/thumbs/exploreyourparks.png" alt="exploreyourparks.com" /></a>
+		<header>
+			<h3>ExploreYourParks.com</h3>
+		</header>
+		<p>A small project with a lot of google maps integration and javascript, written in asp.net mvc 2 with jquery.</p>
+		<footer><a href="http://www.exploreyourparks.com/">Visit Site</a></footer>
+	</article>
+	<article class="clearfix">
+		<a href="/content/images/portfolio/hilariti.png" class="screenshot" title="Hilariti.com"><img src="/content/images/portfolio/thumbs/hilariti.png" alt="Hilariti.com" /></a>
+		<header>
+			<h3>Hilariti.com</h3>
+		</header>
+		<p>Private project for an application to the Capital Factory 2010 Accelerator program.</p>
+		<footer>Site not currently available online.</footer>
+	</article>
+	<article class="clearfix">
+		<a href="/content/images/portfolio/filmflorida.png" class="screenshot" title="FilmFlorida.org"><img src="/content/images/portfolio/thumbs/filmflorida.png" alt="FilmFlorida.org" /></a>
+		<header>
+			<h3>FilmFlorida.org</h3>
+		</header>
+		<p>Film Florida is a not-for-profit corporation that provides a leadership role in Florida's film and entertainment industries by representing a coalition of interests, including private industry, local film commissions, industry associations and labor organizations.</p>
+		<footer><a href="http://www.filmflorida.org/">Visit Site</a></footer>
+	</article>
+</section>
+@section head {
+	<link rel="Stylesheet" href="@Url.Content("~/content/css/colorbox.css")" />
+}
+@section scripts {
+	<script src="@Url.Content("~/scripts/jquery.colorbox.min.js")"></script>
+	<script>
+	$(function() {
+		$('.screenshot').colorbox();
+	});
+	</script>
+}

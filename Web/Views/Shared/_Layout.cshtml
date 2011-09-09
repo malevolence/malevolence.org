@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<meta name="author" content="Bill Williams" />
+@if (ViewBag.MetaDescription != null) {
+	<meta name="description" content="@ViewBag.MetaDescription" />
+}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="http://fonts.googleapis.com/css?family=Rock+Salt" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Play" rel="stylesheet">
+	<link href="http://fonts.googleapis.com/css?family=Walter+Turncoat" rel="stylesheet">
+	<link href="@Url.Content("~/Content/css/site.css")" rel="stylesheet">
+	<link href="@Url.Content("~/Content/css/style.css")" rel="stylesheet">
+	@RenderSection("head", false)
+	<script src="@Url.Content("~/Scripts/modernizr-2.0.6.min.js")"></script>
+</head>
+<body>
+@if (TempData.ContainsKey("message")) {
+	<div class="message">@TempData["message"]</div>
+ }
+	<div id="container">
+		<header id="site-header">
+			<hgroup>
+				<h1><a href="/" title="Home">Malevolence.org</a></h1>
+				<h2>Insert witty tagline here&#8230;</h2>
+			</hgroup>
+			<nav id="site-nav" class="clearfix">
+				<ul>
+					<li>@Html.ActionLink("Home", "Index", "Home")</li>
+					<li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+					<li>@Html.ActionLink("Galleries", "Index", "Gallery")</li>
+					<li>@Html.ActionLink("Portfolio", "Portfolio", "Home")</li>
+				@if (Request.IsAuthenticated) {
+					<li>@Html.ActionLink("Admin", "Index", "Home", new { area = "Admin" }, null)</li>
+				}
+				</ul>
+			</nav>
+		</header>
+		<div id="main" class="clearfix">
+			<div id="content">
+			@RenderBody()
+			</div>
+			<aside id="sidebar">
+				<div id="hcard-Bill-Williams" class="vcard">
+					<img src="/content/images/bill_williams.jpg" alt="photo of Bill Williams" class="photo" />
+					<h3>Quick Facts</h3>
+					<dl>
+						<dt>Name:</dt>
+						<dd class="fn">Bill Williams</dd>
+						<dt>Location:</dt>
+						<dd class="addr"><span class="locality">Orlando</span>, <span class="region">FL</span></dd>
+						<dt>Email:</dt>
+						<dd><a href="mailto:malevolence@gmail.com" class="email">malevolence@gmail.com</a></dd>
+						<dt>Twitter:</dt>
+						<dd><a href="http://twitter.com/#!/malevolenc">@@malevolenc</a></dd>
+						<dt>LinkedIn:</dt>
+						<dd><a href="http://www.linkedin.com/in/malevolence">malevolence</a></dd>
+					</dl>
+				</div>
+				<img src="/content/images/HTML5_Badge_128.png" alt="HTML5, Bitches!" />
+			</aside>
+		</div>
+
+		<footer id="site-footer">
+			<p>&#169; @DateTime.Today.Year Bill Williams. All rights reserved.</p>
+		</footer>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="/scripts/jquery-1.6.3.min.js"><\/script>')</script>
+	<script src="@Url.Content("~/Scripts/plugins.js")"></script>
+	@RenderSection("scripts", false)
+	<div id="freeow" class="freeow freeow-bottom-right"></div>
+	<div id="log"></div>
+	<script>
+		window._gaq = [['_setAccount', 'UA-23590237-1'], ['_trackPageview'], ['_trackPageLoadTime']];
+		Modernizr.load({
+			load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+		});
+	</script>
+</body>
+</html>

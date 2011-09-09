@@ -1,0 +1,93 @@
+﻿/* Layout */
+body { font-family: verdana, sans-serif; }
+h1 { font-family: 'Rock Salt', Verdana, Sans-Serif; }
+h2,h3,h4,h5,h6 { font-family: 'Play', Verdana, Sans-Serif; }
+h1>a, h2>a, h3>a, h4>a, h5>a, h6>a { text-decoration: none;}
+h1 { font-size: 182%; }
+h2 { font-size: 153.9%; margin-bottom: 1em; }
+h3 { font-size: 138.5%; margin-botttom: 1em; }
+h4 { font-size: 123.1%; }
+h5 { font-size: 108%; }
+p { margin-bottom: 1em; }
+img { display: block; border: 0; }
+nav a { text-decoration: none; }
+#site-nav { background-color: #000; background-image: -moz-linear-gradient(0 50% 90deg, #000, #666); background-image: -webkit-gradient(linear, 0 0, 0 50%, from(#666), to(#000)); }
+#site-nav li { float: left; }
+#site-nav a { display: block; padding: .5em 2em; font-weight: bold; }
+#site-nav a:hover, #site-nav a:focus { background-color: #607890; color: #000; }
+#container { width: 960px; margin: 0 auto; position: relative; }
+#site-header { position: relative; }
+#site-header h1 { margin: .8em 0; }
+#site-header h2 { position: absolute; bottom: .5em; right: 0; }
+#login-display { position: absolute; top: 10px; right: 10px; text-align: right; }
+#main, #admin-main { border: 1px solid #000; border-top: none; border-bottom: none; position: relative; background: url(/content/images/black.png) repeat-y top right; }
+#admin-main { background-image: none; }
+#content { padding: 10px; position: relative; float: left; width: 730px; }
+#admin-main #content { padding: 10px; position: relative; width: 938px; }
+#sidebar { float: left; margin-left: 10px; width: 178px; background-color: #000; color: #ccc; padding: 0 10px 10px; }
+#sidebar img { margin: 0 auto 1em auto; }
+#sidebar a:hover, #sidebar a:focus { color: #ccf; }
+#site-footer { text-align: center; background-color: #000; background-image: -moz-linear-gradient(0 50% 90deg, #000, #666); background-image: -webkit-gradient(linear, 0 0, 0 50%, from(#666), to(#000)); color: #fff; font-weight: bold; padding: .5em 2em; clear: both; }
+#site-footer p { margin-bottom: 0; }
+.left { text-align: left; }
+.center { text-align: center; }
+.center img { margin: 0 auto; }
+.right { text-align: right; }
+dl { margin-bottom: 1em; }
+dt { font-weight: bold; }
+dd { margin-left: 10px; margin-bottom: .5em; }
+
+/* Tables */
+table { border: solid 1px #607890; border-collapse: collapse; margin-bottom: 20px; width: 100%; }
+table td { padding: 5px; border: solid 1px #607890; }
+table th { padding: 6px 5px; text-align: left; background-color: #607890; border: solid 1px #607890; color: #fff; }
+
+/* Forms */
+fieldset { margin: 0 0 20px 0; padding: 0; float: left; clear: left; width: 100%; border: 1px solid #000; background-color: #f0f0f0; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff), to(#f0f0f0)); }
+legend { color: #000; font-weight: bold; padding: 0; margin-left: 10px; }
+fieldset ol { padding: 10px 10px 0 10px; list-style: none; zoom: 1; margin: 0 0 0 10px; }
+fieldset li { padding: 0 0 10px 0; float: left; clear: left; width: 100%; }
+label { display: block; font-weight: bold; }
+.no-block label { display: inline; }
+fieldset.actions { border-style: none; float: none; padding-left: 20px; background-color: transparent; background-image: none; }
+textarea { width: 98%; height: 10em; margin: 0; }
+
+/* Gallery */
+#albums > article { min-height: 150px; margin-bottom: 20px; }
+#albums img, #projects img { display: block; float: left; margin: 0 20px 0 0; border: 1px solid #000; }
+#projects > article { margin-bottom: 20px; }
+#album { position: relative; }
+#album > header > span { position: absolute; top: 5px; right: 0; text-align: right; }
+.album { margin-bottom: 20px; }
+.album img { float: left; border: 1px solid #ccc; padding: 10px; background-color: #fff; margin: 0 10px 0 0; }
+.album-info { float: left; }
+.photos { list-style: none; margin: 0; padding: 0; font-family: 'Walter Turncoat', Verdana, Sans-Serif; }
+.photos>li { float: left; margin: 0 10px 10px 0; border: 1px solid #ccc; padding: 10px; -webkit-box-shadow: 0 4px 8px #000; -moz-box-shadow: 0 4px 8px #000; box-shadow: 0 4px 8px #000; text-align: center; height: 182px; width: 152px; overflow: hidden; background-color: #fff; position: relative; }
+.photos>li:nth-child(4n) { margin-right: 0; }
+.photos>li>span, .photos>li>a { display: block; line-height: 1.2em; }
+.photos img { border: 1px solid #999; }
+.ui-sortable>li { cursor: move; }
+.photos>li.photo-placeholder { margin: 0 10px 10px 0; border: 1px solid #06c; padding: 10px; height: 182px; width: 152px; background-color: #ccf; }
+.photos .make-cover { position: absolute; top: 10px; left: 10px; width: 16px; height: 16px; display: block; background: url(../images/icons/picture_save.png) no-repeat 0 0; text-indent: -999em; overflow: hidden; }
+.photos .delete-photo { position: absolute; top: 10px; right: 10px; width: 16px; height: 16px; display: block; background: url(../images/icons/picture_delete.png) no-repeat 0 0; text-indent: -999em; overflow: hidden; }
+#photos { position: relative; }
+
+/* Pager */
+.pager { line-height: 24px; border-top: 1px solid #ccc; padding-top: 10px; font-weight: bold; }
+.pager>span, .pager>a { float: left; display: block; border: 1px solid #607890; padding: 0; margin: 0 3px; color: #607890; padding: 0 4px; text-decoration: none; }
+.pager>span { color: #ccc; border-color: #ccc; }
+.pager>span.selected { color: #f90; border-color: #f90; }
+.pager>a:hover, .pager>a:focus { color: #fff; background-color: #607890; }
+
+/* Buttons */
+a.btn { border: 1px solid #000; color: #000; background-color: #ccc; padding: 5px 10px; font-weight: bold; margin: 0 10px 0 0; text-decoration: none; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+a.btn:hover, a.btn:focus { background-color: #000; color: #ccc; }
+div.actions { margin: 10px 0; position: absolute; top: 0; right: 0; }
+div.actions>a.btn { float: left; display: block; }
+#photos a.save { position: absolute; right: 0; top: -10px; }
+a.delete { border: 1px solid #c00; background-color: #fcc; color: #c00; }
+a.delete:hover { background-color: #c00; color: #fcc; }
+a.back { border: 1px solid #00c; background-color: #ccf; color: #00c; }
+a.back:hover, a.back:focus { background-color: #00c; color: #ccf; }
+a.add, a.edit, a.save { border: 1px solid #0c0; background-color: #cfc; color: #0c0; }
+a.add:hover, a.add:focus, a.edit:hover, a.edit:focus, a.save:hover, a.save:focus { background-color: #0c0; color: #cfc; }

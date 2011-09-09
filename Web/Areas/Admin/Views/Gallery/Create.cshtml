@@ -1,0 +1,20 @@
+﻿@model Malevolence.Core.Models.Album
+@{
+	ViewBag.Title = "Create Album";
+}
+<h2>Create New Album</h2>
+@Html.ValidationSummary(true)
+@using (Html.BeginForm())
+{
+	@Html.Partial("_CreateOrEdit")
+	<fieldset class="actions">
+		<input type="submit" value="Create Album" />
+	</fieldset>
+}
+<div class="actions">
+	@Html.ActionLink("Back to List", "Index", null, new { @class = "btn back" })
+</div>
+@section scripts {
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+}

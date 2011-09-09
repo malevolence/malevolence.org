@@ -1,0 +1,13 @@
+﻿@model Malevolence.Core.Models.Photo
+@{
+    ViewBag.Title = "ShowPhoto";
+	string caption = string.IsNullOrEmpty(Model.Caption) ? "Album Photo" : Model.Caption;
+}
+<h2>Show Photo</h2>
+<div class="center">
+	<img src="@Url.Content("~/content/images/photos/")@Model.FileName" alt="@caption" />
+	<span class="caption">@caption</span>
+</div>
+<div class="actions">
+	@Html.RouteLink("Back to Album", "GalleryDetail", new { slug = Model.Album.UrlSlug }, new { @class = "btn back" })
+</div>

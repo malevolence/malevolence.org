@@ -1,0 +1,197 @@
+﻿@model Malevolence.Core.Models.Album
+@{
+	ViewBag.Title = "Edit Album";
+}
+<h2>Edit Album</h2>
+@Html.ValidationSummary(true)
+@if (Model.CoverPhotoID.HasValue) {
+	<div><img src="/content/images/photos/thumbs/@Model.CoverPhoto.FileName" alt="Album Cover" id="album-cover" /></div>
+} else {
+	<div><img src="/content/images/default/album_cover.png" alt="Album Cover" id="album-cover" /></div>
+}
+@using (Html.BeginForm())
+{
+	@Html.HiddenFor(x => x.ID)
+	@Html.Partial("_CreateOrEdit")
+	<fieldset class="actions">
+		<input type="submit" value="Save Changes" />
+	</fieldset>
+}
+<div id="photos">
+<h3>Album Photos</h3>
+@if (Model.Photos.Count > 0) {
+	<ol class="photos clearfix">
+	@foreach (var p in Model.Photos) {
+		string caption = string.IsNullOrEmpty(p.Caption) ? "Album Photo" : p.Caption;
+		<li id="photo_@(p.ID)" data-photoID="@p.ID">
+			<img src="/content/images/photos/thumbs/@p.FileName" alt="@caption" />
+			<span>@caption</span>
+		</li>
+	}
+	</ol>
+} else {
+	<p>This album contains no photos. You should probably @Html.ActionLink("add some", "AddPhoto", new { id = Model.ID }).</p>
+}
+</div>
+<div class="actions">
+	@Html.ActionLink("Back to List", "Index", null, new { @class = "btn back" })
+	@Html.ActionLink("Add Photos", "AddPhoto", new { id = Model.ID }, new { @class = "btn add" })
+</div>
+@section head {
+	<link rel="Stylesheet" href="@Url.Content("~/content/css/jqueryui.css")" />
+	<link rel="Stylesheet" href="@Url.Content("~/content/css/uploadify.css")" />
+	<link rel="Stylesheet" href="@Url.Content("~/content/css/freeow.css")" />
+}
+@section scripts {
+<script src="@Url.Content("~/Scripts/jqueryui.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.freeow.min.js")"></script>
+	<script>
+		$(function() {
+			$('.photos').sortable({
+				placeholder: 'photo-placeholder'
+			});
+
+			// Add a button to save the sort order
+			$('<a />', {
+				href: '#',
+				text: 'Save Sort Order',
+				class: 'btn save',
+				click: function(e) {
+					e.preventDefault();
+					saveSortOrder();
+				}
+			}).appendTo('#photos');
+
+			$('.photos li').each(function(i) {
+				var photoID = $(this).attr('data-photoID');
+				//log('photoID = ' + photoID);
+				$('<a />', {
+					href: '#',
+					class: 'make-cover',
+					title: 'Set as cover photo',
+					click: function(e) {
+						e.preventDefault();
+						setCoverPhoto(photoID);
+					},
+					text: 'Set as Gallery Cover'
+				}).appendTo(this);
+				$('<a />', {
+					href: '#',
+					class: 'delete-photo',
+					title: 'Delete Photo',
+					click: function(e) {
+						e.preventDefault();
+						deletePhoto(photoID);
+					}
+				}).appendTo(this);
+			});
+
+			// Create some markup for editing captions
+			var input = $('<input />', {
+				type: 'text',
+				id: 'newCaption',
+				focus: function() { this.select(); }
+			});
+
+			var hidden = $('<input />', {
+				type: 'hidden',
+				id: 'captionID'
+			});
+
+			var label = $('<label for="newCaption">New Caption:</label>');
+
+			$('<div />', {
+				id: 'edit-caption'
+			}).append(label).append(input).append(hidden).hide().appendTo('body');
+
+			// Setup the dialog
+			$('#edit-caption').dialog({
+				title: 'Edit Caption',
+				modal: true,
+				autoOpen: false,
+				bgiframe: true,
+				width: 500,
+				buttons: {
+					Cancel: function() {
+						$(this).dialog('close');
+						$('#newCaption').val('');
+						$('#captionID').val('')
+					},
+					'Save Caption': function() {
+						$(this).dialog('close');
+						var caption = $('#newCaption').val();
+						var id = $('#captionID').val();
+						saveCaption(id, caption);
+					}
+				}
+			});
+
+			$('.photos>li>span').click(function() {
+				$('#newCaption').val($(this).text());
+				$('#captionID').val($(this).parent().attr('data-photoID'));
+				$('#edit-caption').dialog('open');
+			});
+
+		});
+
+		function setCoverPhoto(photoID) {
+			var albumID = $('#ID').val();
+			var obj = { albumID: albumID, photoID: photoID };
+
+			log('Setting cover photo to photoID = ' + photoID + ' on albumID ' + albumID);
+
+			$.post('/Admin/Gallery/SetCoverPhoto', obj, function(data, textStatus, jqXHR) {
+				$('#album-cover').fadeTo('fast', 0, function() { $(this).attr('src', $('#photo_' + photoID).children('img').attr('src')).fadeTo('fast', 1)});
+				$('#freeow').freeow('Setting Cover Photo...', data.status, { classes: ['smokey', 'error'] });
+			});
+		}
+
+		function deletePhoto(photoID) {
+			var obj = { id: photoID };
+
+			log('Deleting photo ' + photoID);
+
+			$.post('/Admin/Gallery/DeletePhoto', obj, function(data, textStatus, jqXHR) {
+				$('#freeow').freeow('Deleting Photo...', "Photo deleted successfully", { classes: ['smokey', 'error'] });
+				$('#photo_' + photoID).fadeOut(500, function() {
+					$(this).remove();
+				});
+			});
+		}
+
+		function saveSortOrder() {
+			log('Saving sort order...');
+			var ids = $.makeArray($('.photos li'));
+			var photos = { 'photos': $.map(ids, function(obj) { return $(obj).attr('data-photoID'); }) };
+
+			$.ajax({
+				url: '/Admin/Gallery/SaveSortOrder',
+				data: JSON.stringify(photos),
+				type: 'POST',
+				contentType: 'application/json; charset=utf-8',
+				success: function(data, status, jqXHR) {
+					log(data);
+					$('#freeow').freeow('Saving Sort Order...', "Sort order saved successfully", { classes: ['smokey', 'error'] });
+				}
+			});
+		}
+
+		function saveCaption(id, caption) {
+			log('Saving caption "' + caption + '" on photoID = ' + id);
+
+			var postData = { id: id, caption: caption };
+			$.post('/Admin/Gallery/SaveCaption', postData, function(data, textStatus, jqXHR) {
+				if (data.status == "success") {
+					$('#photo_' + id + ' span').text(caption).fadeIn();
+					$('#newCaption').val('');
+					$('#captionID').val('');
+					$('#freeow').freeow('Saving Sort Order...', "Caption saved successfully", { classes: ['smokey', 'error'] });
+				} else {
+					$('#freeow').freeow('Error saving caption', data.status, { classes: ['smokey', 'error'] });
+				}
+			});
+		}
+	</script>
+}

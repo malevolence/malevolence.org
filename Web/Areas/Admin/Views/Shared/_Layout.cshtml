@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title</title>
+	<meta name="author" content="Bill Williams" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	<link href="@Url.Content("~/Content/css/site.css?v=2")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/css/style.css?v=3")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/css/jqueryui.css?v=4")" rel="stylesheet" />
+	<link href="@Url.Content("~/Content/css/uploadify.css?v=3")" rel="stylesheet" />
+	@RenderSection("head", false)
+	<script src="@Url.Content("~/Scripts/modernizr.min.js")"></script>
+</head>
+<body>
+	@if (TempData.ContainsKey("message")) {
+		<div class="message">@TempData["message"]</div>
+	}
+	<div id="container">
+		<header id="site-header">
+			<hgroup>
+				<h1><a href="/" title="Home">Malevolence.org</a></h1>
+				<h2>Admin, mofo's!</h2>
+			</hgroup>
+			<div id="login-display">@Html.Partial("_LoginPartial")</div>
+			<nav id="site-nav" class="clearfix">
+				<ul>
+					<li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
+					<li>@Html.ActionLink("Gallery", "Index", "Gallery")</li>
+					<li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+				</ul>
+			</nav>
+		</header>
+		<div id="admin-main" class="clearfix">
+			<div id="content">
+				@RenderBody()
+			</div>
+		</div>
+		<footer id="site-footer">
+			<p>&#169; @DateTime.Today.Year Bill Williams. All rights reserved.</p>
+		</footer>
+	</div>
+	<script src="@Url.Content("~/Scripts/jquery.js")"></script>
+	<script src="@Url.Content("~/Scripts/jqueryui.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/plugins.js")"></script>
+	@RenderSection("scripts", false)
+	<div id="freeow" class="freeow freeow-bottom-right"></div>
+	<div id="log"></div>
+</body>
+</html>

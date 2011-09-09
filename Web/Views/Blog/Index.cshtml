@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Malevolence.Core.Models.Post>
+@{
+    ViewBag.Title = "Malevolence.org - Blog";
+}
+<h1>Blog</h1>
+@foreach (var p in Model) {
+	<article>
+		<h1>@Html.ActionLink(p.Title, "Details", new { slug = p.UrlSlug })</h1>
+		@if (!string.IsNullOrWhiteSpace(p.Excerpt)) {
+			@Html.Raw(p.Excerpt)
+		} else {
+			@Html.Raw(p.Body)
+		}
+	</article>
+}

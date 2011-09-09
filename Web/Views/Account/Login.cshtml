@@ -1,0 +1,36 @@
+﻿@model Malevolence.Web.Models.LoginModel
+@{
+	ViewBag.Title = "Login";
+}
+<h2>Login</h2>
+<p>Please enter your username and password. @Html.ActionLink("Register", "Register") if you don't have an account.</p>
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+@using (Html.BeginForm())
+{
+	<fieldset>
+		<legend>Account Information</legend>
+		<ol>
+			<li>
+				@Html.LabelFor(m => m.UserName)
+				@Html.TextBoxFor(m => m.UserName)
+				@Html.ValidationMessageFor(m => m.UserName)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.Password)
+				@Html.PasswordFor(m => m.Password)
+				@Html.ValidationMessageFor(m => m.Password)
+			</li>
+			<li>
+				@Html.LabelFor(m => m.RememberMe)
+				@Html.CheckBoxFor(m => m.RememberMe)
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset class="actions">
+		<input type="submit" value="Login" />
+	</fieldset>
+}
+@section scripts {
+	<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+}
