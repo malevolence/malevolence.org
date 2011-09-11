@@ -43,9 +43,14 @@ namespace Malevolence.Web
 
 		protected void Application_Start()
 		{
+			// Remove the webforms view engine
+			ViewEngines.Engines.Clear();
+			ViewEngines.Engines.Add(new RazorViewEngine());
+
 			AreaRegistration.RegisterAllAreas();
 			RegisterGlobalFilters(GlobalFilters.Filters);
 			RegisterRoutes(RouteTable.Routes);
+			
 			ControllerBuilder.Current.DefaultNamespaces.Add("Malevolence.Web.Controllers");
 			Logger.Info("Application is starting up...");
 		}

@@ -1,0 +1,66 @@
+﻿@model Malevolence.Core.Models.Post
+@{
+    ViewBag.Title = Model.Title;
+}
+<article>
+	<header>
+		<h1>@Model.Title</h1>
+		<div class="info-bar">
+			<time class="post-date" pubdate datetime="@Model.PublishedOn.Value.ToString("s")">@Model.PublishedOn.Value.ToString("f")</time>
+			<span>Posted in @Html.ActionLink(Model.Category.Title, "Categories", new { slug = Model.Category.UrlSlug })</span>
+			<span class="comment-count">@Model.Comments.Count Comments</span>
+		</div>
+	</header>
+	@Html.Raw(Model.Body)
+	<footer>
+		<span>Tweet Button</span>
+		<span>Google +1</span>
+		<span>Other Crap</span>
+	</footer>
+</article>
+<section>
+	<h2>Comments</h2>
+	@if (Model.Comments.Count > 0) {
+		<ul id="comments">
+		@foreach (var c in Model.Comments) {
+			<li>
+				<div class="info-bar">
+					<time datetime="@c.CreatedOn.ToString("s")">@c.CreatedOn.ToString("f")</time>
+				</div>
+				@Microsoft.Web.Helpers.Gravatar.GetHtml(c.Author)
+				<div>@c.Text.Replace(Environment.NewLine, "<br />")</div>
+			</li>
+		}
+		</ul>
+	} else {
+		<p>No comments found for this article.</p>
+	}
+
+	@using (Html.BeginForm("AddComment", "Blog")) {
+	@Html.AntiForgeryToken()
+	@Html.ValidationSummary()
+	<fieldset>
+		<legend>Add Comment</legend>
+		<ol>
+			<li>
+				@Html.Label("Email")
+				@Html.TextBox("Email")
+				@Html.ValidationMessage("EmailB")
+			</li>
+			<li>
+				@Html.Label("Url", "Website")
+				@Html.TextBox("Url")
+				@Html.ValidationMessage("Url")
+			</li>
+			<li>
+				@Html.Label("Comment")
+				@Html.TextArea("Comment")
+				@Html.ValidationMessage("Comment")
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset class="actions">
+		<input type="submit" value="Save Comment" />
+	</fieldset>
+	}
+</section>

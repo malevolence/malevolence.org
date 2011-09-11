@@ -25,15 +25,14 @@
 	<div id="container">
 		<header id="site-header">
 			<hgroup>
-				<h1><a href="/" title="Home">Malevolence.org</a></h1>
-				<h2>Admin, mofo's!</h2>
+				<h1><a href="/" title="Home">Malevolence.org Admin</a></h1>
 			</hgroup>
 			<div id="login-display">@Html.Partial("_LoginPartial")</div>
 			<nav id="site-nav" class="clearfix">
 				<ul>
 					<li>@Html.ActionLink("Admin Home", "Index", "Home")</li>
-					<li>@Html.ActionLink("Gallery", "Index", "Gallery")</li>
 					<li>@Html.ActionLink("Blog", "Index", "Blog")</li>
+					<li>@Html.ActionLink("Gallery", "Index", "Gallery")</li>
 				</ul>
 			</nav>
 		</header>
