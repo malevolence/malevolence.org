@@ -2,20 +2,20 @@
 @{
     ViewBag.Title = Model.Title;
 }
-<article>
+<article class="blog-post">
 	<header>
 		<h1>@Model.Title</h1>
-		<div class="info-bar">
+		<div class="info-bar clearfix">
 			<time class="post-date" pubdate datetime="@Model.PublishedOn.Value.ToString("s")">@Model.PublishedOn.Value.ToString("f")</time>
-			<span>Posted in @Html.ActionLink(Model.Category.Title, "Categories", new { slug = Model.Category.UrlSlug })</span>
 			<span class="comment-count">@Model.Comments.Count Comments</span>
+			<span>Posted in @Html.ActionLink(Model.Category.Title, "Categories", new { slug = Model.Category.UrlSlug })</span>
 		</div>
 	</header>
 	@Html.Raw(Model.Body)
-	<footer>
-		<span>Tweet Button</span>
-		<span>Google +1</span>
-		<span>Other Crap</span>
+	<footer class="clearfix">
+		<span><a href="http://twitter.com/share" class="twitter-share-button" data-count="none" data-via="malevolenc">Tweet</a></span>
+		<span><g:plusone size="medium" annotation="none"></g:plusone></span>
+		<span>@Html.ActionLink("permalink", "Details", new { slug = Model.UrlSlug })</span>
 	</footer>
 </article>
 <section>
@@ -24,7 +24,7 @@
 		<ul id="comments">
 		@foreach (var c in Model.Comments) {
 			<li>
-				<div class="info-bar">
+				<div class="info-bar clearfix">
 					<time datetime="@c.CreatedOn.ToString("s")">@c.CreatedOn.ToString("f")</time>
 				</div>
 				@Microsoft.Web.Helpers.Gravatar.GetHtml(c.Author)
@@ -64,3 +64,13 @@
 	</fieldset>
 	}
 </section>
+@section scripts {
+	<script src="http://platform.twitter.com/widgets.js"></script>
+	<script>
+		(function () {
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		})();
+</script>
+}

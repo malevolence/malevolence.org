@@ -176,6 +176,7 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jqueryui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\timepicker.js" />
     <Content Include="Scripts\modernizr-2.0.6.min.js" />
     <Content Include="Scripts\modernizr.min.js" />
     <Content Include="Scripts\plugins.js" />
@@ -245,6 +246,7 @@
     <Content Include="Areas\Admin\Views\Blog\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
     <None Include="Logs\site.log" />
     <Content Include="NLog.config" />
     <Content Include="packages.config" />

@@ -1,0 +1,80 @@
+﻿@model Malevolence.Core.Models.Post
+@{
+    ViewBag.Title = "Edit Post";
+}
+<h2>Edit Post</h2>
+@using (Html.BeginForm()) {
+	@Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ID)
+    <fieldset>
+        <legend>Post</legend>
+		<ol>
+			<li>
+				@Html.LabelFor(model => model.CategoryID)
+				@Html.DropDownListFor(model => model.CategoryID, ((IEnumerable<Malevolence.Core.Models.Category>)ViewBag.Categories).Select(option => new SelectListItem
+				{
+					Text = (option == null ? "None" : option.Title), 
+					Value = option.ID.ToString(),
+					Selected = (Model != null) && (option.ID == Model.CategoryID)
+				}))
+				@Html.ValidationMessageFor(model => model.CategoryID)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.Title)
+				@Html.EditorFor(model => model.Title)
+				@Html.ValidationMessageFor(model => model.Title)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.UrlSlug)
+				@Html.EditorFor(model => model.UrlSlug)
+				@Html.ValidationMessageFor(model => model.UrlSlug)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.Body)
+				@Html.EditorFor(model => model.Body)
+				@Html.ValidationMessageFor(model => model.Body)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.Excerpt)
+				@Html.EditorFor(model => model.Excerpt)
+				@Html.ValidationMessageFor(model => model.Excerpt)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.PublishedOn)
+				@Html.EditorFor(model => model.PublishedOn)
+				@Html.ValidationMessageFor(model => model.PublishedOn)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.IsPublished)
+				@Html.EditorFor(model => model.IsPublished)
+				@Html.ValidationMessageFor(model => model.IsPublished)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.AllowComments)
+				@Html.EditorFor(model => model.AllowComments)
+				@Html.ValidationMessageFor(model => model.AllowComments)
+			</li>
+			<li>
+				@Html.LabelFor(model => model.IsFeatured)
+				@Html.EditorFor(model => model.IsFeatured)
+				@Html.ValidationMessageFor(model => model.IsFeatured)
+			</li>
+		</ol>
+	</fieldset>
+	<fieldset class="actions">
+	    <input type="submit" value="Save" />
+	</fieldset>
+}
+<div class="actions">
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn back" })
+</div>
+@section Scripts {
+	<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+	<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+	<script>
+		$(function () {
+			$(':input[data-datepicker]').datepicker();
+		});
+	</script>
+}

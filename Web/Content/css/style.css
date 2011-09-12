@@ -91,3 +91,9 @@ a.back { border: 1px solid #00c; background-color: #ccf; color: #00c; }
 a.back:hover, a.back:focus { background-color: #00c; color: #ccf; }
 a.add, a.edit, a.save { border: 1px solid #0c0; background-color: #cfc; color: #0c0; }
 a.add:hover, a.add:focus, a.edit:hover, a.edit:focus, a.save:hover, a.save:focus { background-color: #0c0; color: #cfc; }
+
+
+/* Blog */
+.info-bar { background-color: #ccc; padding: 5px; border-top: 1px solid #000; border-bottom: 1px solid #000; margin: .5em 0; }
+.blog-post footer { background-color: #fed; padding: 1em; }
+.info-bar span, .info-bar time, .blog-post footer span { float: left; margin-right: 1em; }

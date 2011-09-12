@@ -50,6 +50,33 @@ namespace Malevolence.Web.Areas.Admin.Controllers
 			return View(post);
 		}
 
+		public ActionResult Edit(int id)
+		{
+			var post = db.GetPostByID(id);
+			if (post == null)
+				return HttpNotFound("No post found with that id.");
+
+			AddCategoriesToViewBag();
+			return View(post);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit(int id, FormCollection form)
+		{
+			var post = db.GetPostByID(id);
+			if (TryUpdateModel(post, form))
+			{
+				db.SavePost(post);
+				TempData["message"] = string.Format("Changes to blog post with ID = {0} saved successfully.", id);
+				return RedirectToAction("edit", new { id = id });
+			}
+
+			AddCategoriesToViewBag();
+			return View(post);
+		}
+
+
 		private void AddCategoriesToViewBag()
 		{
 			ViewBag.Categories = db.GetCategories().ToList();
