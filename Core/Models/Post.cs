@@ -45,7 +45,7 @@ namespace Malevolence.Core.Models
 
 		[ScaffoldColumn(false)]
 		public string Author { get; set; }
-		public virtual ICollection<Comment> Comments { get; set; }
+		public virtual IList<Comment> Comments { get; set; }
 		public virtual Category Category { get; set; }
 
 		public Post()

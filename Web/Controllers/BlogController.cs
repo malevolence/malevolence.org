@@ -32,5 +32,19 @@ namespace Malevolence.Web.Controllers
 
 			return View(post);
 		}
+
+		public ActionResult AddComment(Comment comment)
+		{
+			if (ModelState.IsValid)
+			{
+				comment.IPAddress = "127.0.0.1";
+				var post = db.GetPostByID(comment.PostID);
+				post.AddComment(comment);
+				db.SavePost(post);
+				return RedirectToAction("Details", new { slug = post.UrlSlug }); 
+			}
+			TempData["message"] = "Error adding comment";
+			return RedirectToAction("Index");
+		}
     }
 }

@@ -71,6 +71,38 @@ textarea { width: 98%; height: 10em; margin: 0; }
 .photos .make-cover { position: absolute; top: 10px; left: 10px; width: 16px; height: 16px; display: block; background: url(../images/icons/picture_save.png) no-repeat 0 0; text-indent: -999em; overflow: hidden; }
 .photos .delete-photo { position: absolute; top: 10px; right: 10px; width: 16px; height: 16px; display: block; background: url(../images/icons/picture_delete.png) no-repeat 0 0; text-indent: -999em; overflow: hidden; }
 #photos { position: relative; }
+#album-cover { float: left; margin-right: 10px; padding-top: 7px; }
+#edit-album form { float: left; width: 776px; }
+
+#droparea {
+  height: 200px;
+  width: 450px;
+  border-radius: 10px;
+  border: 2px dashed #ccc;
+  color: #336699;
+  font-family: 'Josefin Sans Std Light', Helvetica, sans-serif;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+#droparea.rounded {
+  -webkit-box-shadow: inset 0px 0px 50px #777;
+  -moz-box-shadow: inset 0px 0px 50px #777;
+  box-shadow: inset 0px 0px 50px #777;
+
+}
+
+#file-list {
+	width: 90%;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#file-list img { width: 100px; float: left; }
+.progress-bar { background-color: #ccf; border: 1px dotted #000; margin-bottom: 1em; padding: 0; text-align: center; }
+
+.progress-bar.uploaded { background-color: #cfc; border: 1px dotted #0f0; }
 
 /* Pager */
 .pager { line-height: 24px; border-top: 1px solid #ccc; padding-top: 10px; font-weight: bold; }
@@ -94,6 +126,8 @@ a.add:hover, a.add:focus, a.edit:hover, a.edit:focus, a.save:hover, a.save:focus
 
 
 /* Blog */
-.info-bar { background-color: #ccc; padding: 5px; border-top: 1px solid #000; border-bottom: 1px solid #000; margin: .5em 0; }
-.blog-post footer { background-color: #fed; padding: 1em; }
+.info-bar { background-color: #f0f0f0; padding: 5px; border-top: 1px solid #444; border-bottom: 1px solid #444; margin: .5em 0; }
+.blog-post footer { background-color: #f0f0f0; padding: 1em; }
 .info-bar span, .info-bar time, .blog-post footer span { float: left; margin-right: 1em; }
+#comments { margin-left: 0; padding-left: 0; }
+#comments li { list-style: none; padding-left: 0; margin-left: 0; }

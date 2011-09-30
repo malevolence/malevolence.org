@@ -7,7 +7,7 @@
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6BC9133F-171E-4963-B722-0E37B3ADA273}</ProjectGuid>
-    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Malevolence.Web</RootNamespace>
@@ -47,7 +47,10 @@
     <Reference Include="Microsoft.Web.Helpers">
       <HintPath>..\packages\microsoft-web-helpers.1.15\lib\Microsoft.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=2.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -60,8 +63,6 @@
       <HintPath>..\packages\PagedList.1.10\lib\net40\PagedList.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -72,18 +73,30 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET MVC 4\Assemblies\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v2.0\Assemblies\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
-    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="WebActivator, Version=1.4.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="WebActivator, Version=1.4.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivator.1.4.2\lib\net40\WebActivator.dll</HintPath>
+      <HintPath>..\packages\WebActivator.1.4.3\lib\net40\WebActivator.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -163,14 +176,16 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="humans.txt" />
-    <Content Include="Release Notes - Microsoft.Web.Helpers.txt" />
     <Content Include="robots.txt" />
+    <Content Include="Scripts\file-upload2.js" />
+    <Content Include="Scripts\file-upload.js" />
     <Content Include="Scripts\jquery-1.6.3-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.3.js" />
     <Content Include="Scripts\jquery-1.6.3.min.js" />
     <Content Include="Scripts\jquery.colorbox.min.js" />
     <Content Include="Scripts\jquery.freeow.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.tmpl.min.js" />
     <Content Include="Scripts\jquery.uploadify.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -247,6 +262,7 @@
     <Content Include="Areas\Admin\Views\Blog\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Areas\Admin\Views\Blog\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Gallery\AddPhotoDragDrop.cshtml" />
     <None Include="Logs\site.log" />
     <Content Include="NLog.config" />
     <Content Include="packages.config" />

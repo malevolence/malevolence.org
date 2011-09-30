@@ -3,11 +3,12 @@
 	ViewBag.Title = "Edit Album";
 }
 <h2>Edit Album</h2>
+<div id="edit-album" class="clearfix">
 @Html.ValidationSummary(true)
 @if (Model.CoverPhotoID.HasValue) {
-	<div><img src="/content/images/photos/thumbs/@Model.CoverPhoto.FileName" alt="Album Cover" id="album-cover" /></div>
+	<img src="/content/images/photos/thumbs/@Model.CoverPhoto.FileName" alt="Album Cover" id="album-cover" width="150" height="150" />
 } else {
-	<div><img src="/content/images/default/album_cover.png" alt="Album Cover" id="album-cover" /></div>
+	<img src="/content/images/default/album_cover.png" alt="Album Cover" id="album-cover" width="150" height="150" />
 }
 @using (Html.BeginForm())
 {
@@ -17,6 +18,7 @@
 		<input type="submit" value="Save Changes" />
 	</fieldset>
 }
+</div>
 <div id="photos">
 <h3>Album Photos</h3>
 @if (Model.Photos.Count > 0) {
@@ -35,7 +37,7 @@
 </div>
 <div class="actions">
 	@Html.ActionLink("Back to List", "Index", null, new { @class = "btn back" })
-	@Html.ActionLink("Add Photos", "AddPhoto", new { id = Model.ID }, new { @class = "btn add" })
+	@Html.ActionLink("Add Photos", "AddPhotoDragDrop", new { id = Model.ID }, new { @class = "btn add" })
 </div>
 @section head {
 	<link rel="Stylesheet" href="@Url.Content("~/content/css/jqueryui.css")" />

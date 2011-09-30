@@ -80,6 +80,11 @@ namespace Malevolence.Web.Areas.Admin.Controllers
 			return View(id);
 		}
 
+		public ActionResult AddPhotoDragDrop(int id)
+		{
+			return View(id);
+		}
+
 		[HttpPost]
 		public ActionResult AddPhoto(int id, HttpPostedFileBase file)
 		{
@@ -139,6 +144,7 @@ namespace Malevolence.Web.Areas.Admin.Controllers
 					photo.SortOrder = album.Photos.Max(x => x.SortOrder) + 1;
 				album.AddPhoto(photo);
 				db.SaveAlbum(album);
+				System.Threading.Thread.Sleep(1000);
 				return "Photo saved";
 			}
 			return "No file found";

@@ -1,0 +1,25 @@
+﻿@model int
+@{
+    ViewBag.Title = "AddPhotoDragDrop";
+}
+<h2>Upload Files</h2>
+@Html.Hidden("albumID", Model)
+<div id="droparea" class="center linear">
+	<h2>Drop image files here from your desktop</h2>
+	<span>( try multiple files )</span>
+</div>
+<div id="totalFileSize"></div>
+<script type="text/html" id="tmplProgress">
+	<li class="clearfix">
+		<img src="${file.src}" alt=${file.name}" title="${file.name}" />
+		<div class="progress-container">
+			<div class="progress-bar">
+				Uploading ${file.name} &mdash; ${file.size} KB. Type: ${file.type}
+			</div>
+		</div>
+	</li>
+</script>
+@section scripts {
+	<script src="/scripts/jquery.tmpl.min.js"></script>
+	<script src="/scripts/file-upload2.js"></script>
+}

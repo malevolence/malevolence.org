@@ -1,6 +1,6 @@
 ﻿@model int
 @{
-ViewBag.Title = "Add Photo";
+	ViewBag.Title = "Add Photo";
 }
 <h2>Add Photo</h2>
 @Html.ValidationSummary(true)
@@ -28,26 +28,30 @@ ViewBag.Title = "Add Photo";
 	<script>
 		var auth = '@(Request.Cookies[FormsAuthentication.FormsCookieName] == null ? "" : Request.Cookies[FormsAuthentication.FormsCookieName].Value)';
 		var sessionID = '@(Session.SessionID)';
+		var albumID = @Model;
+		var url = '@Url.Action("Edit", new { id = Model })';
+		var scriptUrl = '@Url.Action("AddPhotoAjax")';
+
 		$(function() {
 			$('#file1').uploadify({
 				fileDataName: 'file',
 				fileDesc: 'Web Image Files (.jpg, .gif, .png)',
 				fileExt: '*.jpg;*.gif;*.png',
-				uploader: '@Url.Content("~/Content/flash/uploadify.swf")',
-				script: '@Url.Action("AddPhotoAjax")',
-				cancelImg: '@Url.Content("~/Content/images/jquery/uploadify/cancel.png")',
+				uploader: '/Content/flash/uploadify.swf',
+				script: scriptUrl,
+				cancelImg: '/Content/images/jquery/uploadify/cancel.png',
 				auto: true,
 				buttonText: 'Select Photo(s)',
 				checkExisting: false,
 				multi: true,
 				scriptData: {
-					ASPSESSID: sessionID,
 					AUTHID: auth,
-					id: @Model
+					id: albumID,
+					ASPSESSID: sessionID
 				},
 				onUploadComplete: function(file) {
-					window.location = '@Url.Action("Edit", new { id = Model })'
-				}
+					window.location = url;
+				},
 			});
 		});
 	</script>

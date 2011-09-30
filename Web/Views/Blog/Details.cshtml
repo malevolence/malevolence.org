@@ -25,10 +25,11 @@
 		@foreach (var c in Model.Comments) {
 			<li>
 				<div class="info-bar clearfix">
+					<span>Comment #@(Model.Comments.IndexOf(c) + 1)</span> &mdash;
 					<time datetime="@c.CreatedOn.ToString("s")">@c.CreatedOn.ToString("f")</time>
 				</div>
 				@Microsoft.Web.Helpers.Gravatar.GetHtml(c.Author)
-				<div>@c.Text.Replace(Environment.NewLine, "<br />")</div>
+				<div>@c.Text</div>
 			</li>
 		}
 		</ul>
@@ -37,25 +38,21 @@
 	}
 
 	@using (Html.BeginForm("AddComment", "Blog")) {
+	@Html.Hidden("PostID", Model.ID)
 	@Html.AntiForgeryToken()
 	@Html.ValidationSummary()
 	<fieldset>
 		<legend>Add Comment</legend>
 		<ol>
 			<li>
-				@Html.Label("Email")
-				@Html.TextBox("Email")
-				@Html.ValidationMessage("EmailB")
+				@Html.Label("author", "Email")
+				@Html.TextBox("author")
+				@Html.ValidationMessage("author")
 			</li>
 			<li>
-				@Html.Label("Url", "Website")
-				@Html.TextBox("Url")
-				@Html.ValidationMessage("Url")
-			</li>
-			<li>
-				@Html.Label("Comment")
-				@Html.TextArea("Comment")
-				@Html.ValidationMessage("Comment")
+				@Html.Label("Comment", "Text")
+				@Html.TextArea("Text")
+				@Html.ValidationMessage("Text")
 			</li>
 		</ol>
 	</fieldset>
